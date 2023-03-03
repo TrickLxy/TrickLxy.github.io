@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>开关按钮</title>
+        <style>
+        label {
+            /* background-color: cadetblue; */
+            display: inline-block;
+            width: 200px;
+            height: 100px;
+            position: relative;
+        }
+        input {
+            /* opacity: 0;
+            width: 0;
+            height: 0;
+            margin: 0; */
+            /* position: absolute;
+            left: 200px; */
+        }
+        span {
+            background-color: #8C1818;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            cursor: pointer;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .t1 {
+            content: 'OFF';
+            position: absolute;
+            left: 20px;
+            top: 33px;
+            color: #8C1818;
+            font-size: 30px;
+            z-index: 2;
+        }
+        .t2{
+            content: 'NO';
+            position: absolute;
+            right: 25px;
+            top: 33px;
+            color: #fff;
+            font-size: 30px;
+            z-index: 2;
+        }
+        span i{
+            /* 内容为空 */
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            height: 90px;
+            width: 90px;
+            border-radius: 10px;
+            background-color: #fff;
+            transition: 1s;
+            z-index: 1;
+        }
+        input:checked + span{
+            background-color: green;
+        }
+        input:checked + span .t1{
+            color: #fff;
+        }
+        input:checked + span .t2{
+            color: green;
+        }
+        input:checked + span i {
+            transform: translateX(100px);
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <label>  
+            <!-- 行内元素 -->
+            <input type="checkbox"> <!-- 隐藏的 -->
+            <span>
+                <i></i>
+                <div class="t1">OFF</div>
+                <div class="t2">NO</div>
+            </span>
+        </label>
+    </div>
+</body>
+</html>
