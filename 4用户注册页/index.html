@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="success">
+        <p>注册成功！您的信息如下：</p >
+            <ul>
+                <li>邮箱地址：</li>
+                <li>密码：</li>
+                <li>手机号：</li>
+            </ul>
+    </div>
+
+    <script>
+        //?email=123%40163.com&password=123&tel=123
+        console.log(location.search);
+        const liArr = document.querySelectorAll('li')
+        const queryStr = window.location.search
+        // slice()删除第一个？
+        const arr = queryStr.slice(1).split('&')
+        // 转换成数组，把&符转成 ， const arr1 = arr.split('&')
+        // console.log(arr);email=123%40163.com,password=123,tel=123
+        // arr[email=123%40163.com]的第六位
+        let email = arr[0].slice(6)
+        // arr[password=123]的第九位
+        let mima = arr[1].slice(9)
+        // arr[tel=123]的第四位
+        let phone = arr[2].slice(4)
+        console.log(email,mima,phone);
+
+        // 打印到页面
+        liArr[0].innerHTML = `邮箱地址：${email}`
+        liArr[1].innerHTML = `密码：${mima}`
+        liArr[2].innerHTML = `手机号：${phone}`
+    </script>
+</body>
+</html>

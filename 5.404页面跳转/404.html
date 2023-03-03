@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+    <style>
+        h1,p,div{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>404</h1>
+    <p>对不起您访问的页面不存在，将在五秒之后跳转到新浪首页</p>
+    <div>5秒</div>
+    <script>
+        const div = document.querySelector('div')
+        let time = 5
+        let timer = null
+        window.addEventListener('load',()=>{
+            clearInterval(timer)
+            timer = setInterval(function(){
+                
+                if(time === 0){
+                    location = 'http://www.sina.com.cn'
+                    clearInterval(timer)
+                }else{
+                    div.innerHTML = time + '秒'
+                    time--
+                }
+        },1000)
+        })
+    </script>
+</body>
+</html>

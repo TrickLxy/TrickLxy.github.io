@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字数</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        form {
+            width: 500px;
+            border: 1px solid #ccc;
+        }
+
+        textarea {
+            width: 100%;
+        }
+
+        .panel {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <div class="panel">
+            <span>0</span>
+            <button>发送</button>
+        </div>
+    </form>
+    <script>
+        const text = document.querySelector('textarea')
+        const span = document.querySelector('span')
+        let len = 0
+        let finished = true
+        text.value = ''
+        text.addEventListener('compositionstart',function(){
+            console.log('开始合成汉字');
+            finished = false
+        })
+        text.addEventListener('compositionend',function(){
+            console.log('结束合成汉字');
+            finished = true
+        })
+        text.addEventListener('input',function(){
+            if(finished){
+                len = text.value.length
+                span.innerHTML = len
+            }
+            if(len > 200){
+                span.style.color = 'red'
+                span.innerHTML = - (len - 200)
+            }else(
+                span.style.color = 'black'
+            )
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖动滚动查看</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* justify-content: center; */
+        }
+        h1{
+            text-align: center;
+        }
+        div{
+            width: 40vh;
+            height: 20vh;
+            background-color: blueviolet;
+            margin: 20px 0 20px 0;
+            color: white;
+            font-size: 2.5rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(-400px);
+            transition: 1s;
+            opacity: 0;
+        }
+        div:nth-of-type(even){
+            transform: translateX(400px);
+        }
+        div.show{
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    </style>
+</head>
+<body>
+    <h1>拖动滚动条查看</h1>
+    <div>你好JavaScript!</div>
+    <div>你好JavaScript!</div>
+    <div>你好JavaScript!</div>
+    <div>你好JavaScript!</div>
+    <div>你好JavaScript!</div>
+    <div>你好JavaScript!</div>
+    <div>你好JavaScript!</div>
+    <div>你好JavaScript!</div>
+    <div>你好JavaScript!</div>
+    <div>你好JavaScript!</div>
+
+    <script>
+        const divArr = document.querySelectorAll('div')
+
+        window.addEventListener('scroll',showFn)
+
+        function showFn(){
+            divArr.forEach(div =>{
+                if(parseInt(div.getBoundingClientRect().top) < window.innerHeight /6*5){
+                    div.classList.add('show')
+                }else{
+                    div.classList.remove('show')
+                }
+            })
+        }
+    </script>
+</body>
+</html>

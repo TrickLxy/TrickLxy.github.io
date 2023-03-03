@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页面</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            margin: 0;
+            background-color: #55367C;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 16px;
+        }
+        h1,input,label{
+            margin: 0;
+            padding: 0;
+        }
+        #login{
+            background-color: #714FA1;
+            padding: 40px;
+            border-radius: 6px;
+        }
+        h1{
+            padding: 20px 0 40px;
+            text-align: center;
+            color: lavender;
+        }
+        form input{
+            border: none;
+            width: 250px;
+            /* color: #fff; */
+        }
+        form input:not(input[type=button]){
+            background-color: transparent;
+            border-bottom: 2px solid lavender;
+            outline: none;
+            padding: 10px 0;
+            font-size: 24px;
+            color: #fff;
+        }
+        form input:not(input[type=button]):focus{
+            outline: none;
+        }
+        form input:not(input[type=button]) + label span{
+            display: inline-block;
+            transition: .5s;
+        }
+        form input:not(input[type=button]):focus + label span{
+            transform: translateY(-20px);
+        }
+        form label{
+            position: absolute;
+            left: 0;
+            top: 15px;
+            color: lavender;
+        }
+        .input{
+            position: relative;
+        }
+        [type='button']{
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: lavender;
+        }
+        [type='button']:hover{
+            background-color: lavender;
+            cursor: pointer;
+        }
+        [type='button']:active{
+            transform: scale(0.98);
+        }
+        a{
+            color: mediumpurple;
+        }
+    </style>
+</head>
+<body>
+    <div id="login">
+        <h1>登录</h1>
+        <form action="">
+
+            <div class="row input">
+                <input type="text">
+                <label for="">Email</label>
+            </div>
+
+            <div class="row input">
+                <input type="password" value="">
+                <label for="">password</label>
+            </div>
+
+            <div class="row">
+            <input type="button" value="登录">
+            </div>
+
+        </form>
+        <p>没有账号？请先<a href="">注册</a></p>
+    </div>
+    <script>
+        const labels = document.querySelectorAll('label')
+        labels.forEach(label => {
+            label.innerHTML = label.innerHTML .split('').map((letter,index) => {
+                return `<span style="transition-delay:${50*index}ms">${letter}</span>`
+            }).join('')
+        })
+    </script>
+</body>
+</html>

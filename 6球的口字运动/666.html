@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装运动</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            border-radius: 50%;
+        }
+        button{
+            margin-left: 50px;
+        }
+    </style>
+    <script src="./mayFn.js"></script>
+</head>
+<body>
+    <button>按钮</button>
+    <div></div>
+    <script>
+        const btn = document.querySelector('button')
+        const div = document.querySelector('div')
+
+        let timer
+        btn.addEventListener('click',function(){
+            moveFn(div,'left',300,10,20,function(){
+                moveFn(div,'top',300,10,20,function(){
+                    moveFn(div,'left',50,10,20,function(){
+                        moveFn(div,'top',50,10,20) 
+                    })  
+                })
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3925756_xeky71c7hb.css">
+    <title>双击爱心</title>
+    <style>
+        div {
+            position: relative;
+            margin: 0 auto;
+            width: 500px;
+            height: 300px;
+            background: url(./dog.jpeg) no-repeat 0% 0% / cover;
+            /* background-size: cover; */
+            overflow: hidden;
+        }
+        .iconfont {
+            color: red;
+        }
+        .icon-aixin-copy{
+            position: absolute;
+            left: 0;
+            top: 0;
+            /* opacity: 0; */
+            /* transition: 1s;当属性发生改变时触发 */
+            /* transform: translate(-50% -50%) scale(0); */
+            animation: big 1s linear;
+        }
+        @keyframes big {
+            from{
+                transform: translate(-50%,-50%) scale(0);
+                opacity: 1;
+            }
+            to{
+                transform: translate(-50%,-50%) scale(5);
+                opacity: 0;
+            }
+        }
+        /* .atiove {
+            transform: scale(5);
+            opacity: .5;
+        } */
+    </style>
+</head>
+<body>
+    <div> </div>
+    <!-- <i class="iconfont icon-aixin-copy"></i> -->
+    <script>
+        const div = document.querySelector('div')
+        // const i = document.querySelector('i')
+        console.log(div);
+        div.addEventListener('dblclick', function (ev) {
+            const heart = document.createElement('i') //<i></i>
+            heart.classList.add('iconfont')
+            heart.classList.add('icon-aixin-copy')
+            console.log(heart);
+            //思路2先处理样式，再绑定DOM
+            heart.style.left = ev.clientX - ev.target.offsetLeft + 'px'
+            heart.style.top = ev.clientY - ev.target.offsetTop + 'px'
+            div.appendChild(heart)
+            //思路1先绑定DOM，再处理样式
+            // heart.style.left = ev.clientX - ev.target.offsetLeft - heart.offsetWidth /2 + 'px'
+            // heart.style.top = ev.clientY - ev.target.offsetTop - heart.offsetHeight /2 + 'px'
+            // setTimeout(() => {
+                // 当i的left = 鼠标点击的位置 - div.元素的定位坐标 - i.元素的定位坐标/2
+                // heart.style.left = ev.pageX - div.offsetLeft - heart.offsetWidth / 2 + "px"
+                // heart.style.top = ev.pageY - div.offsetTop - heart.offsetHeight / 2 + "px"
+                // heart.classList.add("atiove")
+            // }, 0);
+            setTimeout(() => {
+                heart.remove()
+            }, 1000);
+        })
+    </script>
+</body>
+</html>
+<!-- 
+红心题的需求
+客户：双击图片显示红心
+需求分析：
+1.双击图片，显示爱心
+2.红心跟随鼠标显示
+3.红心使用特效显示
+4.显示完毕再消失
+技术分析
+1.dbclick事件+在线图标+createElement()+appendChild()
+ -->

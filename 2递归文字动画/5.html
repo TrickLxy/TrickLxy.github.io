@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>递归文字</title>
+</head>
+<body>
+    <h1></h1>
+    <script>
+        const h1 = document.querySelector('h1')
+        const input = document.querySelector('input')
+        let str = '吃饭、睡觉、写代码....'
+        let n = 0
+        let speet = 1000/input.value
+        fn()
+        function fn(){
+            h1.innerHTML = str.slice(0,n)
+            n++
+            if(n >= str.length){
+                n = ''
+            }
+            setTimeout(fn,speet)
+        }
+        input.addEventListener('input',()=>{
+            speet = speet / input.value + 160
+            console.log(speet);
+        })
+    </script>
+</body>
+</html>

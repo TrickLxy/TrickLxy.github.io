@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黑白</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;/*???*/
+        }
+        html{
+            height: 100%;
+        }
+        body{
+            background-color: #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;/*???*/
+            height: 100%;
+        }
+        .btn{
+            width: 220px;
+            height: 100px;
+            background-color: #666;
+            box-shadow: 0 0 20px 0 rgb(0, 0, 0) inset;
+            border-radius: 60px;
+            position: relative;
+            cursor: pointer;
+        }
+        .circle{
+            width: 100px;
+            height: 100px;
+            background-color: #666;
+            box-shadow: 0 0 20px 0 rgb(0, 0, 0) inset;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: .5s;
+        }
+        .a{
+            left: 120px;
+            background-color: rgb(253, 251, 251);
+            box-shadow: 0 0 20px 0 rgb(215, 215, 215) inset;
+        }
+        .a1{
+            background-color: #fff;
+        }
+        .a2{
+            background-color: rgb(253, 251, 251);
+            box-shadow: 0 0 20px 0 rgb(215, 215, 215) inset; 
+        }
+    </style>
+</head>
+<body>
+    <div class="btn">
+        <i class="circle"></i>
+    </div>
+    <script>
+        // 点击圆形 让圆形先右移动
+
+        //1获取元素
+        var oDiv = document.querySelector('div')
+        var oI = document.querySelector('.circle')
+        var oI1 = document.querySelector('.btn')
+        var oIi = document.querySelector('body')
+        // 2添加点击事件
+        oDiv.onclick = function(){
+            // 3修改oI的left值
+            // this.style.left = '120px'
+            oI.classList.toggle('a')
+            oI1.classList.toggle('a2')
+            oIi.classList.toggle('a1')
+        }
+    </script>
+</body>
+</html>
