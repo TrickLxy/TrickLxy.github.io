@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>盒子变</title>
+    <style>
+        body {
+            background-color: antiquewhite;
+        }
+
+        div {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            border: 5px solid black;
+            display: inline-block;
+            background-color: lightcoral;
+        }
+
+        button {
+            width: 80px;
+            height: 50px;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>选择一个盒子 再点击按钮</h1>
+    <section>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
+    <button class="before">前插</button>
+    <button class="after">后插</button>
+    <button class="reset">重置</button>
+    <script>
+        //目标选择任意一个盒子点击 再点按钮控制从哪个位置插入出现颜色或重置 
+
+        //获取
+        // const box = document.querySelector('section')
+        // const div = document.querySelectorAll('div')
+        // const btnq = document.querySelector('.befter')
+        // const btnh = document.querySelector('.after')
+        // const btnc = document.querySelector('.reset')
+
+        // for(let i = 0 ;i < div.length;i++){
+        //     div[i].onclick = function(){
+        //     div[i].style.border = '5px solid skyblue'
+        // }
+        // }
+        const before = document.querySelector('.before')
+        const after = document.querySelector('.after')
+        const reset = document.querySelector('.reset')
+        const box = document.querySelector('section')
+        let activeEleme = null
+        // 初始化
+        function init() {
+            const boxArr = document.querySelectorAll('section div')
+            // console.log(boxArr);
+            for (let i = 0; i < boxArr.length; i++) {
+                addEvent(boxArr[i])
+            }
+        }
+        init()
+
+        // 点击前插按钮
+        before.addEventListener('click', () => {
+            let tempDiv = document.createElement('div')
+            // 添加随机背景色
+            tempDiv.style.backgroundColor = `rgb(${color()},${color()},${color()})`
+            if(activeEleme){
+                activeEleme.insertAdjacentElement('beforeBegin', tempDiv)
+            }
+            addEvent(tempDiv)
+            // color(tempDiv)
+        })
+        // 点击后插按钮
+        after.addEventListener('click', () => {
+            let tempDiv = document.createElement('div')
+            // 添加随机背景色
+            tempDiv.style.backgroundColor = `rgb(${color()},${color()},${color()})`
+            if(activeEleme){
+                activeEleme.insertAdjacentElement('afterend', tempDiv)
+            }
+            addEvent(tempDiv)
+            // color(tempDiv)
+        })
+        // 点击重置按钮
+        reset.addEventListener('click',() => {
+            // 全部清空
+            while(box.firstChild){
+                box.removeChild(box.firstChild)
+            }
+            // 重新生成4个
+            for(let i=0;i<4;i++){
+                let tempDiv = document.createElement('div')
+                box.appendChild(tempDiv)
+                addEvent(tempDiv)
+            }
+        })
+        // 注册函数时间
+        function addEvent(ele){
+            ele.addEventListener('click', function () {
+                const boxArr2 = document.querySelectorAll('section div')
+                    for (let j = 0; j < boxArr2.length; j++) {
+                        boxArr2[j].style.borderColor = 'black'
+                    }
+                    // 边框变色
+                    ele.style.borderColor = 'skyblue'
+                    // 存储目标元素
+                    activeEleme = ele
+                    // console.log(activeEleme);
+                })
+        }
+        // 随机颜色 
+        function color(ele){
+            //  ele.style.background  = `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`
+            return Math.random() * (255 - 150) + 150
+        }
+    </script>
+</body>
+
+</html>
