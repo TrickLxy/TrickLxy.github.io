@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手风琴</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body,
+        button,
+        p {
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            color: #D6CFE2;
+        }
+        body {
+            font-size: 16px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #app {
+            width: 800px;
+        }
+        button {
+            background-color: #8452c2;
+            width: 800px;
+            border: none;
+            padding: 10px 0 10px 10px;
+            text-align: left;
+            position: relative;
+        }
+        button::before{
+            content: 'ⅴ';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-size: 15px;
+        }
+        button:hover{
+            cursor: pointer;
+            background-color: #6c439f;
+        }
+        .content{
+            overflow: hidden;
+            max-height: 0;
+            background-color: #be90ff;
+            /* height: 0; */
+            font-size: 14px;
+            transition: .6s;
+        }
+        .content p{
+            padding: 10px 20px;
+        }
+        .show::before{
+            content: 'ⅹ';
+            background-color: #333;
+            padding: 0px 3px;
+            border-radius: 50%;
+        }
+        .show + .content{
+            max-height: 800px;
+        }
+    </style>
+</head>
+<body>
+    <!-- accordion: 手风琴 -->
+        <section id="app">
+            <div class="itme">
+                <button>null和undefined区别</button>
+                <div class="content">
+                    <p>
+                        首先Undefined和Null都是基本数据类型，这两个基本数据类型分别都只有
+                        一个值，就是undefined和null, undefined 代表的含义是未定义，null 代
+                        表的含义是空对象。一般变量声明了但还没有定义的时候会返回
+                        undefined, null主要用于赋值给一些可能会返回对象的变量， 作为初始化。
+                        undefined在JavaScript中不是一个保留字， 这意味着可以使用undefined
+                        来作为-一个变量名,但是这样的做法是非常危险的，它会影响对undefined
+                        值的判断。我们可以通过一些方法获得安全的undefined值，比如说void
+                        0.当对这两种类型使用typeof进行判断时，Null 类型化会返回"object",
+                        这是一个历史遗留的问题。当使用双等号对两种类型的值进行比较时会返回
+                        true,使用三个等号时会返回false.
+                        </p>
+                </div>
+            </div>
+            <div class="itme">
+                <button>为什么0.1+0.2!== 0.3，如何让其相等?</button>
+                <div class="content">
+                    <p>
+                        在开发过程中遇到类似这样的问题: let n1 = 0.1. n2 = 0.2 console.log(n1 +
+                        n2) / :0000000000000复制代码这里得到的不是想要的结果，要想
+                        等于0.3,就要把它进行转化: (n1 + n2).toFixed(2) I1注意，toFixed为四舍
+                        五入复制代码toFixed(num)方法可把Number四舍五入为指定小数位数的
+                        数字。那为什么会出现这样的结果呢?
+                    </p>
+                </div>
+            </div>
+            <div class="itme">
+                <button>II和&&操作符的返回值?</button>
+                <div class="content">
+                    <p>
+                        和&&首先会对第- -个操作数执行条件判断，如果其不是布尔值就先强制
+                        转换为布尔类型，然后再执行条件判断。对于II 来说，如果条件判断结果为
+                        true就返回第-个操作数的值，如果为false就返回第二个操作数的值。&&
+                        则相反，如果条件判断结果为true就返回第二个操作数的值，如果为false
+                        就返回第一个操作数的值。I1 和&&返回它们其中- -个操作数的值，而非条
+                        件判断的结果
+                    </p>
+                </div>
+            </div>
+            <div class="itme">
+                <button>什么是JavaScript中的包装类型?</button>
+                <div class="content">
+                    <p>
+                        在JavaScript中，基本类型是没有属性和方法的，但是为了便于操作基本类
+                        型的值，在调用基本类型的属性或方法时JavaScript会在后台隐式地将基本
+                        类型的值转换为对象，如: const a = "abc"; a.length; 3 a.toUpperCase);
+                        11 "ABC"复制代码在访问'abc.length时，JavaScript 将'abc在后台转换成
+                        String'abe'),然后再访问其length属性。JavaScript也可以使用0bject函数
+                        显式地将基本类型转换为包装类型: var a = 'abc' Object(a) 11 String
+                        ("abc"])复制代码也可以使用valueOf方法将包装类型倒转成基本类型:
+                    </p>
+                </div>
+            </div>
+            <div class="itme">
+                <button>为什么会有BigInt的提案? ?</button>
+                <div class="content">
+                    <p>
+                        JavaScript中Number.MAX SAFE JNTEGER表示最大安全数字，计算结果是
+                        9007199254740991,即在这个数范围内不会出现精度丢失(小数除外) .
+                        但是- -旦超过这个范围，js就会出现计算不准确的情况，这在大数计算的时
+                        候不得不依靠一些第三方库进行解决，因此官方提出了Biglnt来解决此问
+                        题。
+                    </p>
+                </div>
+            </div>
+        </section>
+        <script>
+            const btnArr = document.querySelectorAll('button')
+            const content = document.querySelectorAll('.content')
+            let last = btnArr[0]
+            
+            btnArr.forEach((btn)=>{
+                btn.addEventListener('click',()=>{
+                    // btn.classList.contains('show')检查数组里是否包含元素
+                    if(btn === last){
+                        btn.classList.toggle('show')
+                    }else{
+                        // last.classList.remove('show')
+                        btn.classList.add('show')
+                        last = btn
+                    }
+                })
+            })
+        </script>
+</body>
+</html>
