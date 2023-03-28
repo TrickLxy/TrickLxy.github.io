@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>懒加载</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 20px;
+        }
+        #app{
+            width: 600px;
+            display: flex;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+        #app .items div{
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .loader{
+            width: 35px;
+            height: 10px;
+            /* background-color: antiquewhite; */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0;
+            margin: auto;
+        }
+        .show{
+            opacity: 1;
+        }
+        .loader div{
+            width: 10px;
+            height: 24px;
+            background-color: #000;
+            animation: loader 1.2s infinite;
+        }
+        .loader div:nth-child(1){
+            animation-delay: 0s;
+        }
+        .loader div:nth-child(2){
+            animation-delay: .12s;
+        }
+        .loader div:nth-child(3){
+            animation-delay: .24s;
+        }
+        @keyframes loader {
+            0%{
+                height: 24px;
+            }
+            50%,100%{
+                height: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="contarner">
+            <h1>语录</h1>
+
+            <div class="items">
+                <!-- <div class="item">
+                    <span>1</span>
+                    <p>Like to fight for, get cherish, lost forget.</p>
+                    <address>liux</address>
+                </div> -->
+                <!-- <div>到底了o</div> -->
+            </div>
+            <div class="loader">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 懒加载的业务逻辑
+        // 打开页面，请求第一组数据 渲染数据
+        // 判断滚动条到底，请求下一组数据  渲染数据
+        // 全部数据加载完毕，显示“全部加载完毕”
+        const itemsEl = document.querySelector('.items')
+        const loader = document.querySelector('.loader')
+        // const API = `https://api.javascripttutorial.net/v1/quotes/?page=1&limit=10`
+        // 变量
+        let page = 1
+        let limit = 20
+        let all = 0
+        let str = ''
+        function getItems(page,limit){
+            loader.classList.add('show')
+            const API = `https://api.javascripttutorial.net/v1/quotes/?page=${page}&limit=${limit}`
+            const xhr = new XMLHttpRequest()            
+            xhr.open('GET',API,true)
+            xhr.onload = ()=>{
+                const itemData = JSON.parse(xhr.response)
+                console.log(itemData);
+                all = itemData.total
+                ulFn(itemData.data)
+            }
+            xhr.send()
+        }
+        getItems(page,limit)
+        function ulFn(data){
+            data.forEach(item => {
+                const div = document.createElement('div')
+                div.className = 'item'
+                div.innerHTML = `
+                        <span>${item.id}</span>
+                        <p>${item.quote}</p>
+                        <address>${item.author}</address>
+                    `
+                    itemsEl.appendChild(div)
+            });
+            loader.classList.remove('show')
+            if(page === Math.ceil(all/limit)){
+                const div = document.createElement('div')
+                div.innerHTML = '到底咯'
+                itemsEl.appendChild(div)
+            }
+        }
+        window.addEventListener('scroll',()=>{
+             const {clientHeight:a,scrollTop:b,scrollHeight:c} = document.documentElement
+            if(a + b >= c && page < Math.ceil(all/limit)){
+                page++
+                getItems(page,limit)
+            }
+        })
+    </script>
+</body>
+</html>
